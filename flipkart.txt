@@ -1,0 +1,91 @@
+package EXAM;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class flipkart {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
+
+
+            // 1. Open Flipkart
+            driver.get("https://www.flipkart.com/");
+
+            Thread.sleep(3000);
+            System.out.println("PASS: Flipkart Opened");
+
+            // 2. Enter mobile number
+            driver.findElement(By.className("jwCbxy"))
+                    .sendKeys("NUMM");
+
+            Thread.sleep(1000);
+            System.out.println("PASS: Mobile Number Entered");
+
+            // 3. Click Continue
+            driver.findElement(By.className("xqOMQN")).click();
+
+            Thread.sleep(3000);
+            System.out.println("PASS: Continue Clicked");
+
+            // 4. Enter OTP manually
+             Thread.sleep(15000);
+
+            // 5. Click Verify
+            driver.findElement(By.className("xqOMQN")).click();
+
+            Thread.sleep(3000);
+            System.out.println("PASS: Verify Clicked");
+
+            // 6. Search product
+            driver.findElement(By.name("q"))
+                    .sendKeys("bag", Keys.ENTER);
+
+            Thread.sleep(4000);
+            System.out.println("PASS: Product Searched");
+
+            // 7. Open first product
+            driver.findElement(By.cssSelector("a[href*='/p/']")).click();
+
+            Thread.sleep(3000);
+
+            // 8. Switch to new tab if opened
+            String[] tabs = driver.getWindowHandles()
+                    .toArray(new String[0]);
+
+            driver.switchTo().window(tabs[tabs.length - 1]);
+
+            Thread.sleep(3000);
+            System.out.println("PASS: Product Opened");
+
+         // 9. Click Add to Cart
+
+         Thread.sleep(2000);
+
+         driver.findElement(By.xpath(
+             "//*[normalize-space()='Add to Cart' or " +
+             "normalize-space()='Add to cart' or " +
+             "normalize-space()='Buy Now' or " +
+             "normalize-space()='Buy now']"
+         )).click();
+
+         Thread.sleep(3000);
+         System.out.println("PASS: Product Button Clicked");
+
+         // 10. Open Cart
+         driver.get("https://www.flipkart.com/viewcart");
+
+         Thread.sleep(4000);
+         System.out.println("PASS: Cart Opened");
+        
+
+
+        // Browser remains open
+    }
+}

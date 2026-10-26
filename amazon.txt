@@ -1,0 +1,99 @@
+
+package EXAM;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.PageLoadStrategy;
+
+public class amazon {
+
+    public static void main(String[] args) throws Exception {
+
+        ChromeOptions options = new ChromeOptions();
+        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+
+        WebDriver driver = new ChromeDriver(options);
+
+        driver.manage().window().maximize();
+
+        // 1. AMAZON OPEN
+        driver.get("https://www.amazon.in/");
+
+        Thread.sleep(4000);
+
+        System.out.println("PASS : AMAZON OPEN");
+
+        // 2. LOGIN PAGE OPEN
+        driver.findElement(By.id("nav-link-accountList")).click();
+
+        Thread.sleep(3000);
+
+        System.out.println("PASS : LOGIN PAGE OPENED");
+
+        // 3. ENTER EMAIL
+        driver.findElement(By.id("ap_email_login"))
+                .sendKeys("email of the amazon ");
+
+        // CONTINUE
+        driver.findElement(By.id("continue")).click();
+
+        Thread.sleep(3000);
+
+        // 4. ENTER PASSWORD
+        driver.findElement(By.id("ap_password"))
+                .sendKeys("password");
+
+        // SIGN IN
+        driver.findElement(By.id("signInSubmit")).click();
+
+        Thread.sleep(5000);
+
+        System.out.println("PASS : LOGIN STEP COMPLETED");
+
+        // 5. SEARCH PRODUCT
+        driver.findElement(By.id("twotabsearchtextbox"))
+                .sendKeys("bag", Keys.ENTER);
+
+        Thread.sleep(4000);
+
+        System.out.println("PASS : PRODUCT SEARCHED");
+
+        // 6. OPEN FIRST PRODUCT
+        driver.findElements(By.cssSelector(
+                "div[data-component-type='s-search-result'] img.s-image"))
+                .get(0).click();
+
+        Thread.sleep(3000);
+
+        // SWITCH TAB IF A NEW TAB OPENS
+        String[] tabs = driver.getWindowHandles().toArray(new String[0]);
+
+        driver.switchTo().window(tabs[tabs.length - 1]);
+
+        Thread.sleep(2000);
+
+        System.out.println("PASS : FIRST PRODUCT OPENED");
+
+        // 7. ADD TO CART
+        driver.findElement(By.id("add-to-cart-button")).click();
+
+        Thread.sleep(3000);
+
+        System.out.println("PASS : ADD TO CART COMPLETED");
+
+        // 8. OPEN CART
+        driver.findElement(By.id("nav-cart")).click();
+
+        Thread.sleep(3000);
+
+        System.out.println("PASS : CART OPENED");
+
+        // 9. CLOSE BROWSER
+        driver.quit();
+    }
+}
+

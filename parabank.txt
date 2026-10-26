@@ -1,0 +1,71 @@
+
+package EXAM;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class parabank {
+
+    public static void main(String[] args) throws Exception {
+
+        WebDriver driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
+
+        // 1. OPEN PARABANK
+        driver.get("https://parabank.parasoft.com/parabank/index.htm");
+
+        Thread.sleep(3000);
+
+        // 2. CLICK REGISTER
+        driver.findElement(By.linkText("Register")).click();
+
+        Thread.sleep(2000);
+
+        // 3. ENTER PERSONAL DETAILS
+        driver.findElement(By.id("customer.firstName")).sendKeys("Rahul");
+        driver.findElement(By.id("customer.lastName")).sendKeys("Patel");
+        driver.findElement(By.id("customer.address.street")).sendKeys("MG Road");
+        driver.findElement(By.id("customer.address.city")).sendKeys("Ahmedabad");
+        driver.findElement(By.id("customer.address.state")).sendKeys("Gujarat");
+        driver.findElement(By.id("customer.address.zipCode")).sendKeys("380001");
+        driver.findElement(By.id("customer.phoneNumber")).sendKeys("9876543210");
+        driver.findElement(By.id("customer.ssn")).sendKeys("123456789");
+
+        // 4. ENTER USERNAME AND PASSWORD
+        driver.findElement(By.id("customer.username")).sendKeys("rahul202610261");
+        driver.findElement(By.id("customer.password")).sendKeys("Rahul@123");
+        driver.findElement(By.id("repeatedPassword")).sendKeys("Rahul@123");
+
+        Thread.sleep(2000);
+
+        // 5. CLICK REGISTER
+        driver.findElement(By.cssSelector("input[value='Register']")).click();
+
+        Thread.sleep(4000);
+
+        System.out.println("Registration completed...");
+
+        // 6. LOGOUT
+        driver.findElement(By.linkText("Log Out")).click();
+
+        Thread.sleep(3000);
+
+        System.out.println("Logout completed...");
+
+        // 7. LOGIN AGAIN
+        driver.findElement(By.name("username")).sendKeys("rahul202610261");
+        driver.findElement(By.name("password")).sendKeys("Rahul@123");
+
+        driver.findElement(By.cssSelector("input[value='Log In']")).click();
+
+        Thread.sleep(4000);
+
+        System.out.println("Login completed...");
+
+        // 8. CLOSE BROWSER
+        // driver.quit();
+    }
+}
+

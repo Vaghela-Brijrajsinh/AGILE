@@ -1,0 +1,124 @@
+
+package EXAM;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class automationexercise {
+
+    public static void main(String[] args) throws Exception {
+
+        WebDriver driver = new ChromeDriver();
+
+        // 1. OPEN WEBSITE
+        driver.get("https://automationexercise.com/");
+
+        driver.manage().window().maximize();
+
+        Thread.sleep(2000);
+
+        // 2. CLICK SIGNUP / LOGIN
+        driver.findElement(By.linkText("Signup / Login")).click();
+
+        Thread.sleep(2000);
+
+        // 3. ENTER NAME AND EMAIL
+        driver.findElement(By.name("name")).sendKeys("Rahul Patel");
+
+        driver.findElement(By.xpath("(//input[@name='email'])[2]"))
+                .sendKeys("rahul20277@example.com");
+
+        // CLICK SIGNUP BUTTON
+        driver.findElement(By.className("signup-form"))
+                .findElement(By.tagName("button")).click();
+
+        Thread.sleep(2000);
+
+        // 4. ACCOUNT INFORMATION
+
+        // SELECT GENDER
+        driver.findElement(By.id("id_gender1")).click();
+
+        // PASSWORD
+        driver.findElement(By.id("password")).sendKeys("Rahul@12345");
+
+        // DATE OF BIRTH
+        Select day = new Select(driver.findElement(By.id("days")));
+        day.selectByValue("10");
+
+        Select month = new Select(driver.findElement(By.id("months")));
+        month.selectByValue("5");
+
+        Select year = new Select(driver.findElement(By.id("years")));
+        year.selectByValue("2000");
+
+        // NEWSLETTER
+        driver.findElement(By.id("newsletter")).click();
+
+        // SPECIAL OFFERS
+        driver.findElement(By.id("optin")).click();
+
+        // 5. ADDRESS INFORMATION
+        driver.findElement(By.id("first_name")).sendKeys("Rahul");
+
+        driver.findElement(By.id("last_name")).sendKeys("Patel");
+
+        driver.findElement(By.id("company")).sendKeys("ABC Company");
+
+        driver.findElement(By.id("address1")).sendKeys("Satellite Road");
+
+        driver.findElement(By.id("address2")).sendKeys("Near City Mall");
+
+        // COUNTRY
+        Select country = new Select(driver.findElement(By.id("country")));
+        country.selectByVisibleText("India");
+
+        driver.findElement(By.id("state")).sendKeys("Gujarat");
+
+        driver.findElement(By.id("city")).sendKeys("Ahmedabad");
+
+        driver.findElement(By.id("zipcode")).sendKeys("380015");
+
+        driver.findElement(By.id("mobile_number")).sendKeys("9876543210");
+
+        // 6. CREATE ACCOUNT
+        driver.findElement(By.xpath("//button[@data-qa='create-account']"))
+                .click();
+
+        Thread.sleep(3000);
+
+        // 7. CONTINUE
+        driver.findElement(By.xpath("//a[@data-qa='continue-button']"))
+                .click();
+
+        Thread.sleep(3000);
+
+        // 8. LOGOUT
+        driver.findElement(By.xpath("//a[contains(.,'Logout')]"))
+                .click();
+
+        Thread.sleep(3000);
+
+        // 9. LOGIN
+
+        // ENTER EMAIL
+        driver.findElement(By.xpath("//form[@action='/login']//input[@name='email']"))
+                .sendKeys("rahul20277@example.com");
+
+        // ENTER PASSWORD
+        driver.findElement(By.xpath("//form[@action='/login']//input[@name='password']"))
+                .sendKeys("Rahul@12345");
+
+        // CLICK LOGIN BUTTON
+        driver.findElement(By.xpath("//form[@action='/login']//button[@type='submit']"))
+                .click();
+
+        Thread.sleep(3000);
+
+        // 10. CLOSE BROWSER
+        driver.quit();
+    }
+}
+
